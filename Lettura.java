@@ -5,10 +5,12 @@ import java.sql.*;
 
 public class Lettura {
 
-	static final String DATABASE_URL = "jdbc:odbc:magonet";
+	static final String DATABASE_URL = "jdbc:odbc:namedatabase";
 	
 	private String descrizione;
 	private double quantitaconf;
+	private String user="";
+	private String password="";
 	
 	
 	public Lettura(String cod, int letture){
@@ -17,7 +19,7 @@ public class Lettura {
 		Statement statement = null;
 		
 		try{
-			connection = DriverManager.getConnection(DATABASE_URL,"sa","cpn053K1");
+			connection = DriverManager.getConnection(DATABASE_URL,"user","password");
 			statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery("SELECT Description,ReorderingLotSize FROM MA_Items JOIN MA_ItemsGoodsData ON MA_Items.Item=MA_ItemsGoodsData.Item  WHERE MA_Items.Item='"+cod+"'");
 			while(resultSet.next()){
